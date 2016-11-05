@@ -83,19 +83,19 @@ namespace SingleResponsibilityPrinciple
             decimal tradePrice;
             if (!decimal.TryParse(fields[2], out tradePrice))
             {
-                LogMessage("WARN"," Trade price on line {0} not a valid decimal: '{1}'", currentLine, fields[2]);
+                LogMessage("WARN","Trade price on line {0} not a valid decimal: '{1}'", currentLine, fields[2]);
                 return false;
             }
 
             return true;
         }
 
-        private void LogMessage(string msgType, string message, params object[] args)
+        private void LogMessage(string type, string message, params object[] args)
         {
-            Console.WriteLine(message, args);
+            Console.WriteLine(type+": "+message, args);
             using (StreamWriter logfile = File.AppendText("log.xml"))
             {
-                logfile.WriteLine("<log><type>"+msgType+"</type><message>" + message + "</message></log> ", args);
+                logfile.WriteLine("<log><type>"+type+"</type><message>" + message + "</message></log> ", args);
             }
         }
 
